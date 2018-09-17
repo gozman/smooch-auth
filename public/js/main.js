@@ -19,7 +19,7 @@ var Cookies = {
   }
 };
 
-var c = function() {
+var domConsole = function() {
     return({
         log: function(msg) {
           consoleDiv = document.getElementById('console');
