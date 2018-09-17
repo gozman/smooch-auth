@@ -429,5 +429,9 @@ iframe {
 #appId {
   display:none;
 }
+
+#returnPanel {
+  display:none;
+}
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/

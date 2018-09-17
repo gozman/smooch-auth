@@ -141,6 +141,7 @@ try {
         });
       } else {
         $("#spinner").hide();
+        $("#returnPanel").show();
       }
     });
   }

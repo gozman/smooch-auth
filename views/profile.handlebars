@@ -1,5 +1,6 @@
+<div id="controls">
 <span class="login100-form-title p-b-51">
-  Your Profile
+  Logging in...
 </span>
 <p><img src="https://avatars.io/gravatar/{{user.email}}"></p>
 <p><h2 id="userName">{{user.name}}</h2></p>
@@ -10,3 +11,18 @@
 <hr>
 <a href="/logout">Logout</a>
 <hr>
+</div>
+
+<div id="returnPanel">
+  {{#if pageId}}
+    <h1>Login complete, you can close this window.</h1>
+  {{/if}}
+
+  {{#if twilioNumber}}
+  <div class="container-login100-form-btn m-t-17">
+    <a href="sms:{{twilioNumber}}" class="login100-form-btn">
+      Success!
+    </a>
+  </div>
+  {{/if}}
+</div>
