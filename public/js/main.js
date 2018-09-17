@@ -82,18 +82,18 @@ var Cookies = {
     if (authCode && jwt) {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
-        embedded: true,
+        embedded: false,
         authCode: authCode
       });
       console.log(initPromise);
     } else {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
-        embedded: true
+        embedded: false
       });
     }
 
-    Smooch.render(document.getElementById('hiddenElement'));
+    //Smooch.render(document.getElementById('hiddenElement'));
 
     initPromise.then(function() {
       if (jwt) {
