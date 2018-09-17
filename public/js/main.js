@@ -124,6 +124,7 @@ try {
             }
           }).then(function() {
             $("#spinner").hide();
+            Smooch.sendMessage("Authenticated as: " + userId);
             c.log("update properties complete");
             c.log(WebviewSdk.hasFeature('close'));
             if(WebviewSdk.hasFeature('close') >= 0) {
