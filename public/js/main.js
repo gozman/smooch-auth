@@ -128,6 +128,7 @@ try {
             c.log(WebviewSdk.hasFeature('close'));
             if(WebviewSdk.hasFeature('close') >= 0) {
               c.log("About to close webview...")
+              $("#returnPanel").show();
 
               try {
                 WebviewSdk.close()
@@ -136,6 +137,7 @@ try {
               }
             } else {
               c.log("no close feature");
+              $("#returnPanel").show();
             }
           });
         });
