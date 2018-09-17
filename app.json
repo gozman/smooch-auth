@@ -1,0 +1,20 @@
+{
+  "name": "smooch-auth",
+  "description": "A demonstration of how to authenticate users on messaging channels over Smooch",
+  "repository": "https://github.com/gozman/smooch-auth",
+  "addons": ["mongolab:sandbox"],
+  "env": {
+    "APP_ID": {
+      "description": "Smooch App ID",
+      "value": ""
+    },
+    "APP_KEY": {
+      "description": "Smooch App Key",
+      "value": ""
+    },
+    "APP_SECRET": {
+      "description": "Smooch App Secret",
+      "value": ""
+    }
+  }
+}
