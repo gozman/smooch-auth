@@ -61,6 +61,15 @@ router.get('/profile', isLoggedIn, function(req, res) {
   var twilioNumber;
   var pageId;
 
+  if(req.session.source == 'messenger') {
+    res.render('profile', { user: req.user.local, appId: process.env.APP_ID, pageId: "320899295336596" });
+  } else if(req.session.source == 'twilio') {
+    res.render('profile', { user: req.user.local, appId: process.env.APP_ID, twilioNumber: "+18552506960" });
+  } else {
+    res.render('profile', { user: req.user.local, appId: process.env.APP_ID });
+  }
+
+/*
   smooch.integrations.list(appId).then((response) => {
     var integrations = response;
     for(var i=0; i<integrations.length; i++) {
@@ -80,6 +89,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
       }
     }
   });
+  */
 });
 
 router.get('/logout', function(req, res) {
