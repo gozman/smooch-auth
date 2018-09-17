@@ -89,10 +89,10 @@ var c = function() {
   var userId = Cookies.get('userId');
   var initPromise;
 
-  c.log("userId = " + userId);
-
 try {
   if ($("#appId").text()) {
+    c.log("userId = " + userId);
+    
     if (authCode && jwt) {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
@@ -125,8 +125,11 @@ try {
           }).then(function() {
             $("#spinner").hide();
             c.log("update properties complete");
+            c.log(window.WebviewSdk.hasFeature('close'));
             if(window.WebviewSdk.hasFeature('close') >= 0) {
+              c.log("About to close webview...")
               window.WebviewSdk.close();
+              c.log("Tried to close webview...")
             } else {
               c.log("no close feature");
             }
