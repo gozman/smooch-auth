@@ -91,6 +91,8 @@ var c = function() {
 
   c.log("userId = " + userId);
 
+  var bar = new ldBar("#loading-bar");
+
 try {
   if ($("#appId").text()) {
     if (authCode && jwt) {
@@ -109,10 +111,19 @@ try {
 
     Smooch.render(document.getElementById('hiddenElement'));
     c.log("initPromise : " + initPromise);
+    if(bar)
+      bar.set(20);
 
     initPromise.then(function() {
+
+      if(bar)
+        bar.set(40);
+
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
+          if(bar)
+            bar.set(70);
+
           c.log("login complete, setting user properties...");
           Smooch.updateUser({
             properties: {
@@ -121,14 +132,19 @@ try {
               "phone": $("#userPhone").text()
             }
           }).then(function() {
+            if(bar)
+              bar.set(100);
+
             c.log("update properties complete");
-            if(window.WebviewSdk.hasFeature('close')) {
+            if(window.WebviewSdk.hasFeature('close') >= 0) {
               window.WebviewSdk.close();
             } else {
               c.log("no close feature");
             }
           });
         });
+      } else {
+        bar.set(100);
       }
     });
   }
