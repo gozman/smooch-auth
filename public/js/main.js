@@ -19,6 +19,17 @@ var Cookies = {
   }
 };
 
+var c = function() {
+    return({
+        log: function(msg) {
+          consoleDiv = document.getElementById('console');
+          para = document.createElement('p');
+          text = document.createTextNode(msg);
+          para.appendChild(text);
+          consoleDiv.appendChild(para);
+        }
+    });
+}();
 
 (function($) {
   "use strict";
@@ -78,6 +89,10 @@ var Cookies = {
   var userId = Cookies.get('userId');
   var initPromise;
 
+  c.log("authCode = " + authCode);
+  c.log("jwt = " + jwt);
+  c.log("userId = " + userId);
+
   if ($("#appId").text()) {
     if (authCode && jwt) {
       initPromise = Smooch.init({
@@ -94,10 +109,12 @@ var Cookies = {
     }
 
     //Smooch.render(document.getElementById('hiddenElement'));
+    c.log("initPromise : " + initPromise);
 
     initPromise.then(function() {
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
+          c.log("login worked");
           Smooch.updateUser({
             properties: {
               "name": $("#userName").text(),
@@ -105,8 +122,11 @@ var Cookies = {
               "phone": $("#userPhone").text()
             }
           }).then(function() {
+            c.log("update properties worked")
             if(window.WebviewSdk.hasFeature('close')) {
               window.WebviewSdk.close();
+            } else {
+              c.log("no close feature");
             }
           });
         });
