@@ -91,7 +91,7 @@ var c = function() {
 
 try {
   if ($("#appId").text()) {
-    c.log("userId = " + userId);
+    domConsole("userId = " + userId);
 
     if (authCode && jwt) {
       initPromise = Smooch.init({
@@ -108,14 +108,14 @@ try {
     }
 
     Smooch.render(document.getElementById('hiddenElement'));
-    c.log("initPromise : " + initPromise);
+    domConsole.log("initPromise : " + initPromise);
 
     initPromise.then(function() {
 
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
 
-          c.log("login complete, setting user properties...");
+          domConsole("login complete, setting user properties...");
           Smooch.updateUser({
             properties: {
               "name": $("#userName").text(),
@@ -125,19 +125,19 @@ try {
           }).then(function() {
             $("#spinner").hide();
             Smooch.sendMessage("Authenticated as: " + userId);
-            c.log("update properties complete");
-            c.log(WebviewSdk.hasFeature('close'));
+            domConsole("update properties complete");
+            domConsole(WebviewSdk.hasFeature('close'));
             if(WebviewSdk.hasFeature('close') >= 0) {
-              c.log("About to close webview...")
+              domConsole("About to close webview...")
               $("#returnPanel").show();
 
               try {
                 WebviewSdk.close()
               } catch(ex) {
-                c.log(ex);
+                domConsole(ex);
               }
             } else {
-              c.log("no close feature");
+              domConsole("no close feature");
               $("#returnPanel").show();
             }
           });
@@ -156,7 +156,7 @@ try {
     ex = "An unknown error occurred.";
   }
 
-  c.log(ex);
+  domConsole(ex);
 }
 
 })(jQuery);
