@@ -27,6 +27,20 @@
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 <!--===============================================================================================-->
 
+<script>
+    (function(d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://cdn.smooch.io/webview-sdk.min.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'WebviewSdkScript'));
+</script>
+
 {{#if appId}}
 <script>
     !function(e,n,t,r){

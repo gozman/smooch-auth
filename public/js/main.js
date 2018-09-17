@@ -104,7 +104,11 @@ var Cookies = {
               "jobTitle": $("#userJob").text(),
               "phone": $("#userPhone").text()
             }
-          });
+          }).then(function() {
+            if(window.WebviewSdk.hasFeature('close')) {
+              window.WebviewSdk.close();
+            }
+          };
         });
       }
     });
