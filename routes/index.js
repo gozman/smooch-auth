@@ -39,6 +39,8 @@ router.get('/logout', function(req, res) {
   res.clearCookie('smoochJwt');
   res.clearCookie('userId');
 
+  req.session.authcode = undefined;
+
   req.logout();
   res.redirect('/');
 });

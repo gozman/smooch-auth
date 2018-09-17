@@ -89,32 +89,31 @@ var c = function() {
   var userId = Cookies.get('userId');
   var initPromise;
 
-  c.log("authCode = " + authCode);
-  c.log("jwt = " + jwt);
   c.log("userId = " + userId);
 
+try {
   if ($("#appId").text()) {
     if (authCode && jwt) {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
-        embedded: false,
+        embedded: true,
         authCode: authCode
       });
       console.log(initPromise);
     } else {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
-        embedded: false
+        embedded: true
       });
     }
 
-    //Smooch.render(document.getElementById('hiddenElement'));
+    Smooch.render(document.getElementById('hiddenElement'));
     c.log("initPromise : " + initPromise);
 
     initPromise.then(function() {
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
-          c.log("login worked");
+          c.log("login complete, setting user properties...");
           Smooch.updateUser({
             properties: {
               "name": $("#userName").text(),
@@ -122,7 +121,7 @@ var c = function() {
               "phone": $("#userPhone").text()
             }
           }).then(function() {
-            c.log("update properties worked")
+            c.log("update properties complete");
             if(window.WebviewSdk.hasFeature('close')) {
               window.WebviewSdk.close();
             } else {
@@ -133,5 +132,14 @@ var c = function() {
       }
     });
   }
+} catch(ex) {
+  if (ex !== null && typeof ex !== "undefined") {
+    if (ex.message) ex = ex.message;
+} else {
+    ex = "An unknown error occurred.";
+}
+
+  c.log(ex);
+}
 
 })(jQuery);
