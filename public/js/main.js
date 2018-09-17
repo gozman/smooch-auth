@@ -108,7 +108,7 @@ var Cookies = {
             if(window.WebviewSdk.hasFeature('close')) {
               window.WebviewSdk.close();
             }
-          };
+          });
         });
       }
     });
