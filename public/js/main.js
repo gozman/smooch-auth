@@ -92,7 +92,7 @@ var c = function() {
 try {
   if ($("#appId").text()) {
     c.log("userId = " + userId);
-    
+
     if (authCode && jwt) {
       initPromise = Smooch.init({
         appId: $("#appId").text(),
@@ -128,8 +128,12 @@ try {
             c.log(window.WebviewSdk.hasFeature('close'));
             if(window.WebviewSdk.hasFeature('close') >= 0) {
               c.log("About to close webview...")
-              window.WebviewSdk.close();
-              c.log("Tried to close webview...")
+              window.WebviewSdk.close().then(function() => {
+                c.log("Closed webview...")
+              }).catch(function(e) => {
+                c.log("Tried to close webview...");
+                c.log(e);
+              });
             } else {
               c.log("no close feature");
             }
@@ -142,10 +146,11 @@ try {
   }
 } catch(ex) {
   if (ex !== null && typeof ex !== "undefined") {
-    if (ex.message) ex = ex.message;
-} else {
+    if (ex.message)
+      ex = ex.message;
+  } else {
     ex = "An unknown error occurred.";
-}
+  }
 
   c.log(ex);
 }
