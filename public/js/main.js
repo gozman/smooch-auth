@@ -128,9 +128,9 @@ try {
             c.log(window.WebviewSdk.hasFeature('close'));
             if(window.WebviewSdk.hasFeature('close') >= 0) {
               c.log("About to close webview...")
-              window.WebviewSdk.close().then(function() => {
+              window.WebviewSdk.close().then(() => {
                 c.log("Closed webview...")
-              }).catch(function(e) => {
+              }).catch((e) => {
                 c.log("Tried to close webview...");
                 c.log(e);
               });
