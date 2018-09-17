@@ -128,12 +128,16 @@ try {
             c.log(window.WebviewSdk.hasFeature('close'));
             if(window.WebviewSdk.hasFeature('close') >= 0) {
               c.log("About to close webview...")
+              try {
               window.WebviewSdk.close().then(() => {
                 c.log("Closed webview...")
               }).catch((e) => {
                 c.log("Tried to close webview...");
                 c.log(e);
               });
+            } catch(ex) {
+              c.log(ex);
+            }
             } else {
               c.log("no close feature");
             }
