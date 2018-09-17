@@ -78,8 +78,6 @@ var Cookies = {
   var userId = Cookies.get('userId');
   var initPromise;
 
-   Smooch.render(document.getElementById('hiddenElement'));
-
   if ($("#appId").text()) {
     if (authCode && jwt) {
       initPromise = Smooch.init({
@@ -94,6 +92,8 @@ var Cookies = {
         embedded: true
       });
     }
+
+    Smooch.render(document.getElementById('hiddenElement'));
 
     initPromise.then(function() {
       if (jwt) {
