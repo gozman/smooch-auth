@@ -91,7 +91,7 @@ var domConsole = function() {
 
 try {
   if ($("#appId").text()) {
-    domcConsole.log("userId = " + userId);
+    domConsole.log("userId = " + userId);
 
     if (authCode && jwt) {
       initPromise = Smooch.init({
@@ -115,7 +115,7 @@ try {
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
 
-          domcConsole.log("login complete, setting user properties...");
+          domConsole.log("login complete, setting user properties...");
           Smooch.updateUser({
             properties: {
               "name": $("#userName").text(),
@@ -125,19 +125,19 @@ try {
           }).then(function() {
             $("#spinner").hide();
             Smooch.sendMessage("Authenticated as: " + userId);
-            domcConsole.log("update properties complete");
-            domcConsole.log(WebviewSdk.hasFeature('close'));
+            domConsole.log("update properties complete");
+            domConsole.log(WebviewSdk.hasFeature('close'));
             if(WebviewSdk.hasFeature('close') >= 0) {
-              domcConsole.log("About to close webview...")
+              domConsole.log("About to close webview...")
               $("#returnPanel").show();
 
               try {
                 WebviewSdk.close()
               } catch(ex) {
-                domcConsole.log(ex);
+                domConsole.log(ex);
               }
             } else {
-              domcConsole.log("no close feature");
+              domConsole.log("no close feature");
               $("#returnPanel").show();
             }
           });
@@ -156,7 +156,7 @@ try {
     ex = "An unknown error occurred.";
   }
 
-  domcConsole.log(ex);
+  domConsole.log(ex);
 }
 
 })(jQuery);
