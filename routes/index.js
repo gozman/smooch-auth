@@ -65,6 +65,8 @@ router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', { user: req.user.local, appId: process.env.APP_ID, pageId: "320899295336596" });
   } else if(req.session.source == 'twilio') {
     res.render('profile', { user: req.user.local, appId: process.env.APP_ID, twilioNumber: "+18552506960" });
+  } else if {
+    res.render('profile', { user: req.user.local, appId: process.env.APP_ID, whatsAppId: "14384763261" });
   } else {
     res.render('profile', { user: req.user.local, appId: process.env.APP_ID });
   }
