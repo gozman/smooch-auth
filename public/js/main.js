@@ -127,7 +127,15 @@ try {
             Smooch.sendMessage("Authenticated as: " + userId);
             domConsole.log("update properties complete");
             domConsole.log(WebviewSdk.hasFeature('close'));
-            if(WebviewSdk.hasFeature('close') >= 0) {
+
+            if(window.MessengerExtensions) {
+              window.MessengerExtensions.requestCloseBrowser(function success() {
+                domConsole.log("Closed");
+              }, function error(err) {
+                domConsole.log(err);
+                $("#returnPanel").show();
+              });
+            } else if(WebviewSdk.hasFeature('close') >= 0) {
               domConsole.log("About to close webview...")
               $("#returnPanel").show();
 
