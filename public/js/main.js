@@ -111,44 +111,24 @@ try {
     domConsole.log("initPromise : " + initPromise);
 
     initPromise.then(function() {
-
       if (jwt) {
         Smooch.login(userId, jwt).then(function() {
 
-          domConsole.log("login complete, setting user properties...");
-          Smooch.updateUser({
-            properties: {
-              "name": $("#userName").text(),
-              "jobTitle": $("#userJob").text(),
-              "phone": $("#userPhone").text()
-            }
-          }).then(function() {
-            $("#spinner").hide();
-            Smooch.sendMessage("Authenticated as: " + userId);
-            domConsole.log("update properties complete");
-            domConsole.log(WebviewSdk.hasFeature('close'));
+          $("#spinner").hide();
+          Smooch.sendMessage("Authenticated as: " + userId);
 
-            if(window.MessengerExtensions) {
-              window.MessengerExtensions.requestCloseBrowser(function success() {
-                domConsole.log("Closed");
-              }, function error(err) {
-                domConsole.log(err);
-                $("#returnPanel").show();
-              });
-            } else if(WebviewSdk.hasFeature('close') >= 0) {
-              domConsole.log("About to close webview...")
-              $("#returnPanel").show();
-
-              try {
-                WebviewSdk.close()
-              } catch(ex) {
-                domConsole.log(ex);
-              }
-            } else {
-              domConsole.log("no close feature");
-              $("#returnPanel").show();
+          if(window.MessengerExtensions) {
+            window.MessengerExtensions.requestCloseBrowser(function success() {}, function error(err) {$("#returnPanel").show();});
+          } else if(WebviewSdk.hasFeature('close') >= 0) {
+            $("#returnPanel").show();
+            try {
+              WebviewSdk.close()
+            } catch(ex) {
+              domConsole.log(ex);
             }
-          });
+          } else {
+            $("#returnPanel").show();
+          }
         });
       } else {
         $("#spinner").hide();
