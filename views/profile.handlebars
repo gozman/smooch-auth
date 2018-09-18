@@ -2,15 +2,7 @@
 <span class="login100-form-title p-b-51">
   Logging in...
 </span>
-<p><img src="https://avatars.io/gravatar/{{user.email}}"></p>
-<p><h2 id="userName">{{user.name}}</h2></p>
-<p id="userJob">{{user.job}}</p>
-<p id="userPhone">{{user.phone}}</p>
-<hr>
 <img id="spinner" src="/images/spinner.gif">
-<hr>
-<a href="/logout">Logout</a>
-<hr>
 </div>
 
 <div id="returnPanel">
@@ -21,8 +13,14 @@
   {{#if twilioNumber}}
   <div class="container-login100-form-btn m-t-17">
     <a href="sms:{{twilioNumber}}" class="login100-form-btn">
-      Success!
+      Back to SMS
     </a>
   </div>
   {{/if}}
+</div>
+
+<div id="debugInfo">
+  <p><h2 id="userName">{{user.name}}</h2></p>
+  <p id="userJob">{{user.job}}</p>
+  <p id="userPhone">{{user.phone}}</p>
 </div>

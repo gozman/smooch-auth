@@ -433,5 +433,14 @@ iframe {
 #returnPanel {
   display:none;
 }
+
+#console {
+  display:none;
+}
+
+#debugInfo {
+  display:none;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
