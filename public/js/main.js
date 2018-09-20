@@ -134,7 +134,20 @@ try {
         $("#spinner").hide();
         $("#returnPanel").show();
       }
-    });
+    }).catch(err) {
+      if(window.MessengerExtensions) {
+        window.MessengerExtensions.requestCloseBrowser(function success() {}, function error(err) {$("#returnPanel").show();});
+      } else if(WebviewSdk.hasFeature('close') >= 0) {
+        $("#returnPanel").show();
+        try {
+          WebviewSdk.close()
+        } catch(ex) {
+          domConsole.log(ex);
+        }
+      } else {
+        $("#returnPanel").show();
+      }      
+    };
   }
 } catch(ex) {
   if (ex !== null && typeof ex !== "undefined") {

@@ -112,6 +112,20 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true,
 }));
 
+//   Don't deploy this method to production, it's super insecure and is really only here for demo purposes.
+//   I've feature-flagged it with an env-var just in case....
+router.post('/api/loginMock', function(req, res) {
+  var enableMock = process.env.ENABLE_MOCK;
+  var retVal = {success: true};
+
+  if(enableMock.indexOf("yes") == 0) {
+    retVal.userId = req.body.userId;
+    retVal.jwt = signJwt(req.body.userId);
+  }
+
+  res.json(retVal);
+});
+
 router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/profile',
   failureRedirect: '/signup',
