@@ -134,7 +134,7 @@ try {
         $("#spinner").hide();
         $("#returnPanel").show();
       }
-    }).catch(err) {
+    }).catch(function(err) {
       if(window.MessengerExtensions) {
         window.MessengerExtensions.requestCloseBrowser(function success() {}, function error(err) {$("#returnPanel").show();});
       } else if(WebviewSdk.hasFeature('close') >= 0) {
@@ -146,8 +146,8 @@ try {
         }
       } else {
         $("#returnPanel").show();
-      }      
-    };
+      }
+    });
   }
 } catch(ex) {
   if (ex !== null && typeof ex !== "undefined") {
